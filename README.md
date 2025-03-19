@@ -1,36 +1,44 @@
-# Twitch Multi-Account Tool
+# 📺 Twitch Multi-Account Tool
 
-A powerful tool that allows you to manage and watch multiple Twitch streams simultaneously in separate Chrome windows with customizable layouts and quality settings.
+<div align="center">
+  
+🚀 A powerful tool that allows you to manage and watch multiple Twitch streams simultaneously in separate Chrome windows with customizable layouts and quality settings.
 
-## Features
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/NotNibloo/MultiACC-Twich-View?style=flat-square)
+![License](https://img.shields.io/github/license/NotNibloo/MultiACC-Twich-View?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-Windows-blue?style=flat-square)
 
-- **Multiple Streams:** Open and manage multiple Twitch streams in separate Chrome windows
-- **Custom Layout:** Automatically arrange windows in an optimal grid layout
-- **Quality Control:** Set quality preferences for streams (auto, source, 720p, 480p, 360p, 160p)
-- **Resource Monitoring:** Real-time tracking of network, CPU, and memory usage
-- **Performance Optimization:** Limit memory usage and optimize Chrome processes
-- **Flexible Configuration:** Import/export settings and customize window count
+</div>
 
-## Requirements
+## ✨ Features
 
-- Python 3.6+
-- Google Chrome browser
-- Windows, macOS, or Linux operating system
+- 🖥️ **Multiple Streams:** Open and manage multiple Twitch streams in separate Chrome windows
+- 📐 **Custom Layout:** Automatically arrange windows in an optimal grid layout
+- 🎮 **Quality Control:** Set quality preferences for streams (auto, source, 720p, 480p, 360p, 160p)
+- 📊 **Resource Monitoring:** Real-time tracking of network, CPU, and memory usage
+- ⚡ **Performance Optimization:** Limit memory usage and optimize Chrome processes
+- ⚙️ **Flexible Configuration:** Import/export settings and customize window count
 
-## Installation
+## 📋 Requirements
 
-### Using Pre-compiled Executable (Windows)
+- 🖥️ Python 3.6+ (for running from source)
+- 🌐 Google Chrome browser
+- 💻 Windows, macOS, or Linux operating system
 
-1. Download the latest release from the [Releases](https://github.com/yourusername/TwitchMultiAccount-GitHub/releases) page
+## 🔧 Installation
+
+### 📦 Using Pre-compiled Executable (Windows)
+
+1. Download the latest release from the [Releases](https://github.com/NotNibloo/MultiACC-Twich-View/releases) page
 2. Extract the ZIP file to a location of your choice
-3. Run `TwitchMultiAccount.exe`
+3. Run `TwitchMultiAccountTool.exe`
 
-### Running from Source
+### 🧪 Running from Source
 
 1. Clone this repository:
 ```
-git clone https://github.com/yourusername/TwitchMultiAccount-GitHub.git
-cd TwitchMultiAccount-GitHub
+git clone https://github.com/NotNibloo/MultiACC-Twich-View.git
+cd MultiACC-Twich-View
 ```
 
 2. Install the required dependencies:
@@ -43,7 +51,7 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-## Usage
+## 🎮 Usage
 
 1. Launch the application
 2. Enter the number of Twitch windows you want to open
@@ -52,7 +60,7 @@ python src/main.py
 5. Optionally set a memory limit per Chrome process
 6. Use the terminal menu to control windows, change settings, or monitor resources
 
-## Configuration
+## ⚙️ Configuration
 
 You can customize the following settings:
 - Number of windows
@@ -62,24 +70,31 @@ You can customize the following settings:
 
 These settings can be exported to a JSON file for backup or sharing, and imported later.
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
-- **Chrome Not Found:** Ensure Google Chrome is installed in the default location
-- **Window Arrangement Issues:** If windows don't arrange properly, try manually repositioning them and select "Rearrange windows" from the menu
-- **Performance Problems:** If experiencing slowdowns, try:
+- **🔎 Chrome Not Found:** Ensure Google Chrome is installed in the default location
+- **🪟 Window Arrangement Issues:** If windows don't arrange properly, try manually repositioning them and select "Rearrange windows" from the menu
+- **⚠️ Performance Problems:** If experiencing slowdowns, try:
   - Reducing the number of windows
   - Lowering stream quality
   - Setting a memory limit
   - Using the "Optimize resource usage" option
 
-## Privacy
+## 🔒 Privacy
 
 This application does not collect or transmit any personal data. It operates entirely on your local machine, opening Chrome windows with Twitch URLs.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributing
+## 👥 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for Twitch viewers everywhere</p>
+  <p>© 2025 notnibloo</p>
+</div> 
