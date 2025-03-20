@@ -15,6 +15,10 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.prompt import Prompt, Confirm
 from rich.progress import Progress
+from rich.layout import Layout
+from rich.spinner import Spinner
+from rich.text import Text
+from rich import box
 
 class TwitchLauncher:
     def __init__(self):
@@ -576,31 +580,77 @@ class TwitchLauncher:
     def show_menu(self):
         """Display and handle the terminal menu"""
         while self.running:
-            self.console.print("\n[bold blue]🖥️ TERMINAL MENU[/bold blue]")
-            table = Table(show_header=True, header_style="bold magenta")
-            table.add_column("Option", style="cyan", justify="center")
-            table.add_column("Action")
-            table.add_row("1", "Close all Twitch windows")
-            table.add_row("2", "Close a specific number of windows")
-            table.add_row("3", "Show current network/CPU/memory usage")
-            table.add_row("4", "Reload all windows")
-            table.add_row("5", "Rearrange windows")
-            table.add_row("6", "Change streamer")
-            table.add_row("7", "Change stream quality")
-            table.add_row("8", "Optimize resource usage")
-            table.add_row("9", "Export current settings")
-            table.add_row("10", "Import settings")
-            table.add_row("11", "Exit script")
-            self.console.print(table)
-
-            choice = Prompt.ask("[bold yellow]Select an option[/bold yellow]")
+            # Clear a few lines before displaying menu for cleaner appearance
+            self.console.print("\n\n")
             
+            # Display a more attractive header
+            header = Panel.fit(
+                "[bold cyan]Twitch Multi-Account Tool[/bold cyan]", 
+                border_style="blue",
+                padding=(1, 10),
+                title="[white on blue] MENU [/white on blue]",
+                subtitle=f"[white on blue] v3.0 [/white on blue]"
+            )
+            self.console.print(header, justify="center")
+            
+            # Create a more visually organized table
+            table = Table(show_header=True, header_style="bold white on blue", border_style="blue", box=box.ROUNDED)
+            table.add_column("", style="dim", justify="center", width=4)
+            table.add_column("Option", style="cyan bold", justify="center", width=8)
+            table.add_column("Description", style="white", width=50)
+            
+            # Group options by category for better organization
+            table.add_row("", "[bold blue]WINDOWS MANAGEMENT[/bold blue]", "")
+            table.add_row("1️⃣", "Close All", "Close all Twitch windows")
+            table.add_row("2️⃣", "Close Some", "Close a specific number of windows")
+            table.add_row("3️⃣", "Show Stats", "View current network/CPU/memory usage")
+            table.add_row("4️⃣", "Reload All", "Reload all windows")
+            table.add_row("5️⃣", "Rearrange", "Rearrange windows in grid layout")
+            
+            table.add_row("", "[bold blue]STREAM SETTINGS[/bold blue]", "")
+            table.add_row("6️⃣", "Streamer", "Change streamer channel")
+            table.add_row("7️⃣", "Quality", "Change stream quality")
+            
+            table.add_row("", "[bold blue]SYSTEM & SETTINGS[/bold blue]", "")
+            table.add_row("8️⃣", "Optimize", "Optimize resource usage")
+            table.add_row("9️⃣", "Export", "Export current settings")
+            table.add_row("🔟", "Import", "Import settings")
+            table.add_row("1️⃣1️⃣", "Exit", "Exit application")
+            
+            self.console.print(table, justify="center")
+            
+            # Display current settings
+            current_settings = Table.grid(padding=1)
+            current_settings.add_column(style="green", justify="right")
+            current_settings.add_column(style="white")
+            
+            current_settings.add_row("Current Streamer:", f"[bold]{self.streamer or 'Twitch Homepage'}[/bold]")
+            current_settings.add_row("Quality:", f"[bold]{self.quality}[/bold]")
+            current_settings.add_row("Windows:", f"[bold]{len(self.windows)}/{self.num_windows}[/bold]")
+            
+            settings_panel = Panel(
+                current_settings,
+                title="[white on green] CURRENT SETTINGS [/white on green]",
+                border_style="green",
+                padding=(1, 2)
+            )
+            self.console.print(settings_panel, justify="center")
+            
+            # Improved input prompt with hint
+            choice = Prompt.ask(
+                "\n[bold yellow]Select an option[/bold yellow]",
+                default="",
+                show_default=False
+            )
+            
+            # Process user choice with visual feedback
             if choice == "1":
-                self.console.print("[bold red]❌ Closing all Twitch windows...[/bold red]")
+                self.console.print("\n[bold white on red] CLOSING ALL WINDOWS [/bold white on red]")
                 self.close_windows()
             
             elif choice == "2":
                 try:
+                    self.console.print("\n[bold white on yellow] CLOSE WINDOWS [/bold white on yellow]")
                     close_count = int(Prompt.ask("[bold yellow]How many windows do you want to close?[/bold yellow]"))
                     if close_count <= 0:
                         self.console.print("[bold red]Number must be positive.[/bold red]")
@@ -610,40 +660,50 @@ class TwitchLauncher:
                     self.console.print("[bold red]Please enter a valid number.[/bold red]")
 
             elif choice == "3":
-                self.console.print("[bold green]📡 Network, CPU and memory usage is displayed live in the terminal.[/bold green]")
+                self.console.print("\n[bold white on blue] STATS DISPLAY [/bold white on blue]")
+                self.console.print("[bold green]📡 Network, CPU and memory usage is displayed live at the top of the terminal.[/bold green]")
             
             elif choice == "4":
-                self.console.print("[bold yellow]Reloading all windows...[/bold yellow]")
+                self.console.print("\n[bold white on yellow] RELOADING WINDOWS [/bold white on yellow]")
                 self.close_windows()
                 self.launch_chrome_windows()
                 self.arrange_windows()
                 
             elif choice == "5":
-                self.console.print("[bold yellow]Rearranging windows...[/bold yellow]")
+                self.console.print("\n[bold white on blue] REARRANGING WINDOWS [/bold white on blue]")
                 self.arrange_windows()
                 
             elif choice == "6":
-                new_streamer = Prompt.ask("[bold yellow]Enter a new streamer name or leave blank for the Twitch homepage[/bold yellow]").strip()
-                self.streamer = new_streamer
-                self.url = f"https://www.twitch.tv/{self.streamer}" if self.streamer else "https://www.twitch.tv"
-                self.save_settings()
+                self.console.print("\n[bold white on magenta] CHANGE STREAMER [/bold white on magenta]")
+                new_streamer = Prompt.ask(
+                    "[bold yellow]Enter a new streamer name or leave blank for the Twitch homepage[/bold yellow]",
+                    default=self.streamer
+                ).strip()
                 
-                if Confirm.ask("[bold yellow]Reload windows with new streamer?[/bold yellow]"):
-                    self.close_windows()
-                    self.launch_chrome_windows()
-                    self.arrange_windows()
+                if new_streamer != self.streamer:
+                    self.streamer = new_streamer
+                    self.url = f"https://www.twitch.tv/{self.streamer}" if self.streamer else "https://www.twitch.tv"
+                    self.save_settings()
+                    
+                    if Confirm.ask("[bold yellow]Reload windows with new streamer?[/bold yellow]"):
+                        self.close_windows()
+                        self.launch_chrome_windows()
+                        self.arrange_windows()
             
             elif choice == "7":
+                self.console.print("\n[bold white on magenta] CHANGE QUALITY [/bold white on magenta]")
                 self.change_quality()
                 
             elif choice == "8":
-                self.console.print("[bold yellow]Optimizing resource usage...[/bold yellow]")
+                self.console.print("\n[bold white on cyan] OPTIMIZING RESOURCES [/bold white on cyan]")
                 self.optimize_processes()
                 
             elif choice == "9":
+                self.console.print("\n[bold white on green] EXPORT SETTINGS [/bold white on green]")
                 self.export_settings()
                 
             elif choice == "10":
+                self.console.print("\n[bold white on green] IMPORT SETTINGS [/bold white on green]")
                 if self.import_settings():
                     if Confirm.ask("[bold yellow]Reload windows with imported settings?[/bold yellow]"):
                         self.close_windows()
@@ -651,11 +711,15 @@ class TwitchLauncher:
                         self.arrange_windows()
             
             elif choice == "11":
-                self.console.print("[bold red]🔴 Exiting script...[/bold red]")
+                self.console.print("\n[bold white on red] EXITING APPLICATION [/bold white on red]")
                 self.running = False
             
             else:
-                self.console.print("[bold red]❌ Invalid choice! Please select a valid option.[/bold red]")
+                self.console.print("[bold red]❌ Invalid choice! Please select a valid option (1-11).[/bold red]")
+            
+            # Add a small pause after action for better UX
+            if choice and choice != "11" and self.running:
+                time.sleep(1.5)
 
     def run(self):
         """Main method to run the application"""
