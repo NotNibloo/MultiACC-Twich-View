@@ -223,7 +223,8 @@ class TwitchLauncher:
                 
                 old_recv, old_sent = new_recv, new_sent
                 
-                self.console.print(f"[cyan]\\[📶] Download: {download_speed:.2f} KB/s | [🚀] Upload: {upload_speed:.2f} KB/s[/cyan]", end="\r")
+                # Use a fixed position for network stats - top line
+                self.console.print(f"[cyan]Network: [📶] Download: {download_speed:.2f} KB/s | [🚀] Upload: {upload_speed:.2f} KB/s[/cyan]", end="\r")
             except Exception as e:
                 self.console.print(f"[bold red]Network monitoring error: {e}[/bold red]", end="\r")
 
@@ -264,10 +265,14 @@ class TwitchLauncher:
                     except (psutil.NoSuchProcess, psutil.AccessDenied):
                         pass
                 
-                self.console.print(f"[magenta]\\[💻] Chrome processes: {len(chrome_processes)} | CPU: {cpu_percent:.1f}% | RAM: {total_memory_mb:.1f} MB[/magenta]", end="\r")
+                # Use a fixed position for system stats - second line (add newline and spaces)
+                self.console.print(f"\n[magenta]System: [💻] Chrome processes: {len(chrome_processes)} | CPU: {cpu_percent:.1f}% | RAM: {total_memory_mb:.1f} MB[/magenta]", end="\r")
+                # Move cursor back up to prevent scrolling
+                self.console.print("\033[1A", end="")
                 
             except Exception as e:
-                self.console.print(f"[bold red]CPU/Memory monitoring error: {e}[/bold red]", end="\r")
+                self.console.print(f"\n[bold red]CPU/Memory monitoring error: {e}[/bold red]", end="\r")
+                self.console.print("\033[1A", end="")
 
     def get_user_input(self):
         """Get and validate user input"""
