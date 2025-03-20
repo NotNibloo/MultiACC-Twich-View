@@ -1,16 +1,50 @@
-# Changelog
+# Twitch Multi-Account Tool Changelog
 
-All notable changes to the Twitch Multi-Account Tool will be documented in this file.
+## Version 3.1.0 (2023-08-25)
 
-## [1.0.0] - 2025-03-19
+### Major New Features
+- **Profile Management System**
+  - Create, edit and delete profile configurations
+  - Save different window setups with unique names and descriptions
+  - Profiles store number of windows, Chrome profiles, streamer, and quality settings
+  - Easily switch between different configurations
 
-### Added
-- Initial release
-- Multiple Twitch stream support in separate Chrome windows
-- Automatic window arrangement in grid layout
-- Stream quality selection (auto, source, 720p, 480p, 360p, 160p)
-- Real-time network, CPU, and memory monitoring
-- Chrome process optimization
-- Memory limit setting per Chrome process
-- Import/export settings functionality
-- Terminal-based menu interface with Rich text formatting 
+- **Multiple Monitor Support**
+  - Create custom layouts for different monitors
+  - Specify which monitor to use for each layout
+  - Configure grid dimensions and window counts per monitor
+  - Save and load different layouts
+  - Perfect for multi-monitor setups
+
+- **Crash Recovery System**
+  - Automatic detection of crashed Chrome windows
+  - Automatically reopens crashed windows with the same profile
+  - Maintains window position and arrangement
+  - Preserves stream URL and quality settings
+  - Provides real-time status updates on recovery
+
+### Improvements
+- Better handling of Chrome profiles
+- Improved error reporting for missing profiles
+- Enhanced window arrangement algorithm
+- More robust error handling overall
+
+### Bug Fixes
+- Fixed issue with window positioning on certain monitors
+- Resolved window handle errors when closing Chrome instances
+- Fixed profile directory detection on different operating systems
+
+## Version 3.0.0 (2023-07-10)
+
+### Major Features
+- Multi-window Twitch viewer with Chrome profile support
+- Watch time tracking for all windows
+- Network usage monitoring
+- Stream quality selection
+- Settings import/export functionality
+
+### Initial Release Features
+- Support for up to 20 Chrome windows
+- Automatic window arrangement
+- Customizable streamer/channel selection
+- Memory usage limitation options 

@@ -1,4 +1,6 @@
-pygetwindow>=0.0.9
-psutil>=5.9.0
-screeninfo>=0.8.1
-rich>=12.0.0 
+psutil==5.9.5
+PyGetWindow==0.0.9
+rich==13.4.2
+pyinstaller==5.13.0
+screeninfo==0.8.1
+pathlib==1.0.1 

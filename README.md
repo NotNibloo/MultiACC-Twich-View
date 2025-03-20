@@ -18,6 +18,16 @@
 - 📊 **Resource Monitoring:** Real-time tracking of network, CPU, and memory usage
 - ⚡ **Performance Optimization:** Limit memory usage and optimize Chrome processes
 - ⚙️ **Flexible Configuration:** Import/export settings and customize window count
+- 🔄 **Multi-Window Support:** Open multiple Twitch streams simultaneously
+- 🔄 **Chrome Profile Integration:** Uses Chrome profiles to manage separate sessions
+- 📅 **Watch Time Tracking:** Track how long each window has been watching a stream
+- 📈 **Network Monitoring:** Real-time network usage statistics
+- 🎨 **Stream Quality Control:** Set quality for all streams (auto, source, 720p, etc.)
+- 🎨 **Window Management:** Automatic window arrangement in grid layout
+- 🎨 **Profile Management System:** Save different configurations with custom names and descriptions
+- 🎨 **Multiple Monitor Support:** Create custom layouts for different monitors
+- 💥 **Crash Recovery System:** Automatically recover crashed Chrome windows
+- 📜 **Settings Import/Export:** Save and load configurations
 
 ## 📋 Requirements
 
